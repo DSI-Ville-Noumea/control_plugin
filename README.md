@@ -27,13 +27,15 @@ cd /tmp/control_plugin
 
  Pour une prise en compte immédiate du greffon le script `build_install` redémarre automatiquement les services `httpd` et `foreman-proxy.service`.
 
-Pour pouvoir utiliser correctement le greffon, l'utilisateur système `foreman` doit avoir pouvoir escalader ses privilèges avec `sudo` afin d'éxécuter la commande `/usr/local/bin/r10k deploy environment production` en tant que _super utilisateur_ (`man 8 sudo` et `man 8 visudo` pour la configuration de l'escalade de privilèges).
+Pour pouvoir utiliser correctement le greffon:
+- L'utilisateur système `foreman` doit avoir pouvoir escalader ses privilèges avec `sudo` afin d'éxécuter la commande `/usr/local/bin/r10k deploy environment production` en tant que _super utilisateur_ (`man 8 sudo` et `man 8 visudo` pour la configuration de l'escalade de privilèges).
+- _SELinux_ doit être positionné à `permissive` afin de ne pas empêcher l'escalade des privilèges de l'utilisateur `foreman`
 
-## Usage
+## Utilisation
 
 L'utilisation du greffon _ControlPlugin_ se fait à l'aide de l'interface _Web_ de _Foreman_.
 
-1. Se connecter sur le serveur hébergeant _Foreman_ avec un utilisateur ayant les permissions nécessaires
+1. Se connecter sur le serveur hébergeant _Foreman_ avec un utilisateur ayant les permissions nécessaires (`Organization admin`)
 2. Dans le menu `Administrer`, cliquer sur `Actualiser environnement`
 3. Cliquer sur le bouton `Déployer` qui s'est affiché sur la page
 

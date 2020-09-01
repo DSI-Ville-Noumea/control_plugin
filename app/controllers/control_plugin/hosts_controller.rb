@@ -3,7 +3,7 @@ module ControlPlugin
   class HostsController < ::HostsController
     def deploy
       Foreman::Logging.logger('control_plugin').debug "Déploiement r10k"
-      cmd = "sudo /usr/local/bin/r10k deploy environment production"
+      cmd = "/bin/sudo /usr/local/bin/r10k deploy environment production"
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
         exit_status = wait_thr.value
         if exit_status == 0

@@ -11,6 +11,11 @@ module ControlPlugin
       Foreman::Plugin.register :control_plugin do
         requires_foreman '>= 1.16'
 
+        security_block :control_plugin do
+          permission :deploy_control_plugin, :'control_plugin/hosts' => [:view, :deploy]
+        end
+        add_permissions_to_default_roles Role::ORG_ADMIN => [:deploy_control_plugin]
+        
         # add menu entry
         menu :admin_menu, :template,
              url_hash: { controller: :'control_plugin/hosts', action: :view },
