@@ -43,7 +43,7 @@ En cas d'erreur le fichier de journalisation `/var/log/foreman/production.log` p
 
 ## Copyright
 
-Copyright (c) *2020* *Michaël Costa / MCO System / https://www.mcos.nc*
+Copyright (c) **2020** **Michaël Costa / MCO System / https://www.mcos.nc**
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
