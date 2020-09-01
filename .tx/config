@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[foreman.control_plugin]
+file_filter = locale/<lang>/control_plugin.edit.po
+source_file = locale/control_plugin.pot
+source_lang = en
+type = PO
