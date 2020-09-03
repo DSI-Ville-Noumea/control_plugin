@@ -31,6 +31,10 @@ function item {
 if [ ! $(id -u) -eq 0 ]; then
   on_error "Vous devez être super utilisateur pour éxécuter ce script"
 fi
+notify "Déploiement du script deploy_r10k_env.sh"
+sudo cp ${BUILD_DIR}/deploy_r10k_env.sh /usr/local/bin
+notify "Application des droits et permissions sur /usr/local/bin/deploy_r10k_env.sh"
+sudo chmod +x /usr/local/bin/deploy_r10k_env.sh
 notify "Arrêt du service"
 sudo systemctl stop httpd
 sudo systemctl stop foreman-proxy.service
