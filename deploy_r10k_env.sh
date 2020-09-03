@@ -40,26 +40,26 @@ if [ ! ${RET_VAL} -eq 0 ]; then
 fi
 
 notify "Purge du répertoire temporaire ${TMP_DIR}" >> ${LOG_FILE}
-sudo rm -Rf ${TMP_DIR}/*
+rm -Rf ${TMP_DIR}/*
 RET_VAL=$?
 if [ ! ${RET_VAL} -eq 0 ]; then
   on_error "Erreur lors de la purge" >> ${LOG_FILE}
 fi
 
 notify "Sauvegarde des environnements dans ${TMP_DIR}" >> ${LOG_FILE}
-sudo find ${R10K_ENV_DIR} -maxdepth 1 -type d \( -not -name "production" -and -not -name "$(basename ${R10K_ENV_DIR})" \) -exec cp -R {} ${TMP_DIR} \;
+find ${R10K_ENV_DIR} -maxdepth 1 -type d \( -not -name "production" -and -not -name "$(basename ${R10K_ENV_DIR})" \) -exec cp -R {} ${TMP_DIR} \;
 if [ ! ${RET_VAL} -eq 0 ]; then
   on_error "Erreur lors de la copie des environnements" >> ${LOG_FILE}
 fi
 
 notify "Déploiement de l'environnement 'production'" >> ${LOG_FILE}
-sudo /usr/local/bin/r10k deploy environment production
+/usr/local/bin/r10k deploy environment production
 if [ ! ${RET_VAL} -eq 0 ]; then
   on_error "Erreur lors du déploiement" >> ${LOG_FILE}
 fi
 
 notify "Restauration des environnements depuis ${TMP_DIR}" >> ${LOG_FILE}
-sudo find ${TMP_DIR} -maxdepth 1 -type d -type d \( -not -name "production" -and -not -name "$(basename ${TMP_DIR})" \) -exec cp -R {} ${R10K_ENV_DIR} \;
+find ${TMP_DIR} -maxdepth 1 -type d -type d \( -not -name "production" -and -not -name "$(basename ${TMP_DIR})" \) -exec cp -R {} ${R10K_ENV_DIR} \;
 if [ ! ${RET_VAL} -eq 0 ]; then
   on_error "Erreur lors de la copie des environnements" >> ${LOG_FILE}
 fi
