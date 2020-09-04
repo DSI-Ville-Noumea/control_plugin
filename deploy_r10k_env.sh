@@ -32,7 +32,7 @@ function item {
 # Main
 # ------------------------------------------------------------------------------
 
-notify "Création du répertoire temporaire ${TMP_DIR}" > ${LOG_FILE}
+notify "Création du répertoire temporaire ${TMP_DIR}" 
 mkdir -p ${TMP_DIR}
 RET_VAL=$?
 if [ ! ${RET_VAL} -eq 0 ]; then
@@ -53,7 +53,7 @@ if [ ! ${RET_VAL} -eq 0 ]; then
 fi
 
 notify "Déploiement de l'environnement 'production'" >> ${LOG_FILE}
-/usr/local/bin/r10k deploy environment production
+/usr/local/bin/r10k deploy environment production -pv
 if [ ! ${RET_VAL} -eq 0 ]; then
   on_error "Erreur lors du déploiement" >> ${LOG_FILE}
 fi
@@ -63,3 +63,4 @@ find ${TMP_DIR} -maxdepth 1 -type d -type d \( -not -name "production" -and -not
 if [ ! ${RET_VAL} -eq 0 ]; then
   on_error "Erreur lors de la copie des environnements" >> ${LOG_FILE}
 fi
+notify "Fin(0)" >> ${LOG_FILE}
